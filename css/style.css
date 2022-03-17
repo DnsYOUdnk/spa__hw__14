@@ -1,0 +1,171 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: #ffffff;;
+}
+
+.container {
+    max-width: 1400px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 20px;
+}
+
+.header,
+.footer {
+    flex: 0 0 auto;
+}
+
+.main {
+    flex: 1 0 auto;
+}
+
+.header {
+    background-color: #eeeeee;
+}
+
+.header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.header__logo__image {
+    max-width: 100px;
+    transition: 0.5s;
+}
+
+.header__logo__image:hover {
+    transform: rotate(5deg);
+}
+
+.header__nav__items {
+    margin-left: 60px;
+    list-style: none;
+    display: flex;
+}
+
+.header__nav__item {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.header__nav__item a {
+    text-decoration: none;
+    padding: 10px 20px;
+    color: #000;
+}
+
+.header__nav__item a:hover {
+    text-decoration: 2px underline;
+}
+
+.header__cart:hover img {
+    opacity: 0.6;
+}
+
+.main h1 {
+    font-size: 48px;
+    padding: 20px 0;
+}
+
+.main p {
+    font-size: 20px;
+    padding: 20px 0;
+}
+
+.main__unfinish__gif {
+    display: flex;
+    justify-content: center;
+}
+
+.catalog__wrapper {
+    padding: 20px 0;
+}
+
+.catalog__items {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.catalog__item {
+    width: calc(100%/3 - 7px);
+    background-color: #f0f0f0;
+    padding: 20px 5px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.catalog__item__image{
+    max-width: 400px;
+}
+
+.catalog__item__image img{
+    width: 100%;
+}
+
+.catalog__item__title {
+    text-align: center;
+    padding-top: 20px;
+    font-weight: bold;
+    font-size: 28px;
+}
+
+.catalog__item__title a{
+    text-decoration: none;
+    color: #000;
+}
+
+.catalog__item__title a:hover{
+    text-decoration: 1px underline;
+}
+
+.catalog__item__button-add {
+    width: 300px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.footer {
+    background-color: #eeeeee;
+}
+
+.footer__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer__social {
+    padding: 10px 0;
+}
+
+.footer__social a:not(:last-child){
+    margin-right: 10px;
+}
+
+.footer__social a:hover img{
+    opacity: 0.6;
+}
