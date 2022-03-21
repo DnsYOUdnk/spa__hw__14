@@ -1,34 +1,7 @@
 function Catalog () {
     
-    this.getCatalogData = async () => {
-        let data = [];
-
-        if(localStorage.getItem('catalogData')){
-            data = JSON.parse(localStorage.getItem('catalogData'))
-        } else {
-            const response = await fetch('https://dummyjson.com/products')
-            data = await response.json()            
-            data = data.products
-            data.forEach(element => element.image = element.images[0])
-            const data2 = await this.getCatalogData2();
-                  data2.forEach(item => {
-                      item.id = item.id + data[data.length-1].id;
-                      return item
-                  })
-            data = data.concat(data2)
-            localStorage.setItem('catalogData', JSON.stringify(data))
-        }
-        return data
-    }
-
-    this.getCatalogData2 = async () => {
-        let data = [];
-            const response = await fetch('https://fakestoreapi.com/products');
-            data = await response.json();
-        return data
-    }
-
     this.create = (data) => {
+        data = data || [];
         const catalog = document.createElement('div')
         catalog.classList.add('catalog')
         let listItem = '';
@@ -42,19 +15,17 @@ function Catalog () {
                         <div class="catalog__item__description">
                             <div class="catalog__item__option">
                                 <div class="catalog__item__price">${price} BYN.</div>
-                                <button id="${id}" class="catalog__item__button-add">add to cart</button>
+                                <button id="${id}" class="catalog__item__button-add"> + add to cart</button>
                             </div>
                         </div>
                     </li>`
             
         });
 
-        catalog.innerHTML = `<div class="container">
-                                <div class="catalog__wrapper">
+        catalog.innerHTML = `<div class="catalog__wrapper">
                                     <ul class="catalog__items">
                                         ${listItem}
                                     </ul>
-                                </div>
                             </div>`
         return catalog
     },
@@ -64,15 +35,20 @@ function Catalog () {
         product.classList.add('product')
 
         product.innerHTML=`
-            <div class="container">
                 <div class="product__wraper">
-                    <h1>${title}</h1>
-                    <h2>${category}</h2>
-                    <img src="${image}">
-                    <p>${description}</p>
-                    <p>${price} BYN</p>
+                    <div class="product__image"><img src="${image}"></div>
+                    <div class="product__description">
+                        <h1>${title}</h1>
+                        <h2>${category}</h2>
+                        <p>${description}</p>
+                        <p class="product__price">${price} BYN</p>
+                        <div class="product__buttons">
+                            <button id="${id}" class="catalog__item__button-add"> <span>+</span> add to cart</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                
+                <div class="product__back__btn"><a href="#catalog"> Back to the catalog</a></div>
         `
     return product
     }
@@ -84,7 +60,7 @@ function Catalog () {
     }
 
     this.init = async () => {
-       const data = await this.getCatalogData();
+       const data = await JSON.parse(localStorage.getItem('catalogData'));
        if(location.hash.includes('/')){
            const productData = this.getProductData(data)           
            return this.createProduct(productData)

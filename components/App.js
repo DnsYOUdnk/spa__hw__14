@@ -19,7 +19,7 @@ function App () {
     }
 
     this.getComponetsData = async () => {
-        const headerData = await import('./Header.js')
+        const headerData = await import('./Header.js');
         this.app.appendChild(headerData.default)
         const mainData = await import('./Main.js')
         this.app.appendChild(mainData.default)
