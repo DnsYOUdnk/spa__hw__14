@@ -18,7 +18,7 @@ function Cart () {
                 list += `
                     <div class="cart__product__item">
                         <div class="cart__product__image"><img src="${image}"></div>
-                        <div class="cart__product__title catalog__item__title">Product name: <a href="#catalog/${id}" >${title}</a></div>
+                        <div class="cart__product__title catalog__item__title">Product name: <a href="#catalog/${id}" >${title}</a><p>${price} BYN</p></div>
                         <div class="cart__product__count">Count: <button class="cart__product__count__btn" id="${id+'minus'}">-</button>${count}<button class="cart__product__count__btn" id="${id+'plus'}">+</button></div>
                         <div class="cart__product__price">Price: ${(price*count).toFixed(2)} BYN</div>
                         <div class="cart__product__button">
