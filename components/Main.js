@@ -22,6 +22,8 @@ function Main () {
             import("./Cart.js").then(cartData => {
                 const cart = cartData.default.init();
                 this.container.innerHTML = cart.outerHTML
+                this.deleteEventDeleteBtn()
+                this.changeEventCountBtn()
                 import('../utils/UtilsCart.js').then(responseUtils => {
                     responseUtils.default.init()
                 })   
@@ -55,7 +57,68 @@ function Main () {
                 })
             }
         }
-    }    
+    }   
+    
+    this.deleteEventDeleteBtn = () => {
+        const deleteCartButtons = document.querySelectorAll('.catalog__item__button-delete')
+        deleteCartButtons.forEach(deleteButton =>{
+            deleteButton.addEventListener('click', (e) => {      
+                 this.deleteFromCart(e.target.id)
+            })
+        })
+    } 
+
+    this.changeEventCountBtn = () => {
+        const changeCartButtons = document.querySelectorAll('.cart__product__count__btn')
+        changeCartButtons.forEach(changeButton =>{
+            changeButton.addEventListener('click', (e) => {      
+                 this.changeProductFromCart(e.target.id)
+            })
+        })
+    } 
+
+         
+    this.changeProductFromCart = (idCount) => {
+        const newCount = this.getCartData().map(item => {
+            if( item.id+'minus' == idCount ) {
+                item.count--
+            } else if( item.id+'plus' == idCount ) {
+                item.count++
+            }
+            return item
+        })
+        .filter(({count}) => count != 0)
+        
+        localStorage.setItem('cart', JSON.stringify(newCount));
+        this.checkPointCart()
+        this.render(location.hash)
+    }
+
+    this.getCartData = () => {
+        let cart = JSON.parse(localStorage.getItem('cart'));
+        return cart
+    }
+
+    this.checkPointCart = () => {
+        let cart = this.getCartData();
+        const cartQuantity = document.querySelector('.header__cart__quantity');
+              cartQuantity.innerText = `${cart.length ? cart.length : ''}`
+
+        if(cart.length < 1) {
+            cartQuantity.classList.remove('active')
+        }
+    }
+
+    this.deleteFromCart = (idProduct) => {
+
+        const productToCart = this.getCartData().filter(({id}) => id != idProduct);
+
+              localStorage.setItem('cart', JSON.stringify(productToCart));
+
+        this.checkPointCart()
+        this.render(location.hash)
+    }
+
 
     this.init = () => {
         this.create()

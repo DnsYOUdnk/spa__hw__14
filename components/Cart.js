@@ -5,8 +5,10 @@ function Cart () {
         cart.classList.add('cart')
         if(cartData.length == 0) {
             cart.innerHTML=`<div class="cart__wrapper">
+                                    <div class="cart__gif">
                                     <h2>There are no products in the basket</h2>
-                                    <div class="cart__gif"><img src="../image/gif/about.gif"></div>
+                                    <img src="../image/gif/about.gif">
+                                    </div>
                             </div>`
         } else {
             let list="";
@@ -16,18 +18,19 @@ function Cart () {
                 list += `
                     <div class="cart__product__item">
                         <div class="cart__product__image"><img src="${image}"></div>
-                        <div class="cart__product__title">Product name: ${title}</div>
-                        <div class="cart__product__count">Count: ${count}</div>
-                        <div class="cart__product__price">Price: ${price*count} BYN</div>
+                        <div class="cart__product__title catalog__item__title">Product name: <a href="#catalog/${id}" >${title}</a></div>
+                        <div class="cart__product__count">Count: <button class="cart__product__count__btn" id="${id+'minus'}">-</button>${count}<button class="cart__product__count__btn" id="${id+'plus'}">+</button></div>
+                        <div class="cart__product__price">Price: ${(price*count).toFixed(2)} BYN</div>
                         <div class="cart__product__button">
                         <button id="${id}" class="catalog__item__button-delete">Remove the product</button></div>
                     </div>
                 `
                 cart.innerHTML = `<div class="cart__wrapper">
-                                    <h2>Cart</h2>
+                                    <div class="cart__product__items">
+                                        <h2>Cart</h2>
                                         ${list}
-                                        
-                                    <div class="cart__all__price">Total: ${all} BYN</div>
+                                    </div>
+                                    <div class="cart__all__price">Total: ${all.toFixed(2)} BYN</div>
                                   </div>`
             });
         }

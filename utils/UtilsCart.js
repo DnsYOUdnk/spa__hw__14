@@ -1,5 +1,5 @@
 function UtilsCart () {
-    this.cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart') ) : [];
+    this.cart = [];
     this.dataLocalStorageCatalog = JSON.parse(localStorage.getItem('catalogData'))
     this.cartQuantity = document.querySelector('.header__cart__quantity');
     
@@ -9,13 +9,6 @@ function UtilsCart () {
             addButton.addEventListener('click', (e) => {                            
                  this.addToCart(e.target.id)
                  this.cartQuantity.classList.add('active')
-            })
-        })
-
-        const deleteCartButtons = document.querySelectorAll('.catalog__item__button-delete')
-        deleteCartButtons.forEach(deleteButton =>{
-            deleteButton.addEventListener('click', (e) => {      
-                 this.deleteFromCart(e.target.id)
             })
         })
     } 
@@ -37,14 +30,9 @@ function UtilsCart () {
         localStorage.setItem('cart', JSON.stringify(this.cart))
     }
 
-    this.deleteFromCart = (idProduct) => {
-        const productToCart = this.cart.filter(({id}) => id != idProduct);
-        // this.cartQuantity.innerText = `${this.cart.length}`
-        localStorage.setItem('cart', JSON.stringify(productToCart))
-    }
-
     this.init = ()=>{
         this.addEventAddBtn()
+        this.cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart') ) : [];
     }
 }
 
