@@ -7,7 +7,7 @@ function App () {
     } 
 
     this.getData = async () => {
-        const response = await fetch('../data/data.js')
+        const response = await fetch('./data/data.js')
         const data = await response.text()
         localStorage.setItem('data', data)
         setTimeout(()=>
